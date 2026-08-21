@@ -37,8 +37,12 @@ with st.sidebar:
     except Exception:
         pass
         
-    api_key = st.text_input("Clé API Gemini", value=default_api_key, type="password")
-    
+    if default_api_key:
+        api_key = default_api_key
+        st.success("✅ Clé API détectée et configurée automatiquement.")
+    else:
+        api_key = st.text_input("Clé API Gemini", value="", type="password", help="Saisissez votre clé API si elle n'est pas configurée dans les paramètres de l'application.")
+        
     st.markdown("---")
     st.subheader("Consommation (Tokens)")
     st.metric("Tokens Entrants (Prompt)", st.session_state["tokens_utilises"]["in"])
